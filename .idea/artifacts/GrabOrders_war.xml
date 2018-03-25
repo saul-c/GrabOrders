@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="GrabOrders:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="GrabOrders.war">
-      <element id="artifact" artifact-name="GrabOrders:war exploded" />
-    </root>
-  </artifact>
-</component>
