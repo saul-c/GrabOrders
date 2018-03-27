@@ -22,5 +22,6 @@ public class CategoryTest {
         for (Category c : cs) {
             System.out.println(c.getName());
         }
+
     }
 }
