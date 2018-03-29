@@ -7,8 +7,8 @@
 </head>
 <body>
 <form >
-    id：<input type="text" id="id" value="123" /><br/>
-    名称：<input type="text" id="name" value="category xxx"/><br/>
+    id：<input type="text" id="id" value="4" /><br/>
+    名称：<input type="text" id="name" value="category4"/><br/>
     <input type="button" value="提交" id="sender">
 </form>
 <div id="messageDiv"></div>
@@ -22,6 +22,7 @@
             var jsonData = JSON.stringify(category);
             var page = "submitCategory";
 
+            alert(jsonData);
             $.ajax({
                 type: "post",
                 url: page,
@@ -29,6 +30,7 @@
                 dataType: "json",
                 contentType: "application/json;charset=UTF-8",
                 success: function (result) {
+                    alert(result);
                 }
             });
             //alert("提交成功，请在Tomcat控制台查看服务端接收到的数据");

@@ -13,6 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
+import com.alibaba.fastjson.JSONObject;
 
 @Controller
 @RequestMapping("")
@@ -34,15 +35,13 @@ public class CategoryController {
         mav.setViewName("listCategory");
         return mav;
     }
+
+    @ResponseBody
     @RequestMapping("/submitCategory")
-    public String submitCategory(){
-        System.out.print("444");
-        return "listCategory";
+    public String submitCategory(@RequestBody Category category) {
+        System.out.println("SSM接受到浏览器提交的json，并转换为Category对象:"+category);
+        JSONObject result = new JSONObject();
+        result.put("OK", "OK");
+        return result.toJSONString();
     }
-    /*@ResponseBody
-    @RequestMapping("/submitCategory")
-    public String submitCategory(@RequestBody Category category){
-        categoryService.add(category);
-        return "ok";
-    }*/
 }
