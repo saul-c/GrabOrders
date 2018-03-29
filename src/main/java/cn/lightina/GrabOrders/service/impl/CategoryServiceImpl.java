@@ -14,4 +14,5 @@ public class CategoryServiceImpl implements CategoryService{
     public List<Category> list() {
         return cm.list();
     }
+    public void add(Category c){cm.add(c);}
 }

@@ -6,5 +6,5 @@ import cn.lightina.GrabOrders.pojo.Category;
 public interface CategoryService {
 
     List<Category> list();
-
+    void add(Category c);
 }
