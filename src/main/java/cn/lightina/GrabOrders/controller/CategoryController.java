@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import com.alibaba.fastjson.JSONObject;
@@ -18,7 +16,6 @@ import com.alibaba.fastjson.JSONObject;
 @Controller
 @RequestMapping("")
 public class CategoryController {
-    static Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
     @Autowired
     CategoryService categoryService;
 
@@ -36,12 +33,16 @@ public class CategoryController {
         return mav;
     }
 
+
     @ResponseBody
     @RequestMapping("/submitCategory")
     public String submitCategory(@RequestBody Category category) {
         System.out.println("SSM接受到浏览器提交的json，并转换为Category对象:"+category);
         JSONObject result = new JSONObject();
         result.put("OK", "OK");
+
+
         return result.toJSONString();
+
     }
 }
