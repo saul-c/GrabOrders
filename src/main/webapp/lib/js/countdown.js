@@ -1,5 +1,4 @@
-<script type="text/javascript">
-var intDiff = parseInt(60);//倒计时总秒数量
+var intDiff = parseInt(55);//倒计时总秒数量
 function timer(intDiff){
     window.setInterval(function(){
         var day=0,
@@ -24,4 +23,3 @@ function timer(intDiff){
 $(function(){
     timer(intDiff);
 });
-</script>
