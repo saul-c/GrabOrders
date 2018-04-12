@@ -2,6 +2,7 @@ package cn.lightina.GrabOrders.controller;
 
 import cn.lightina.GrabOrders.service.CategoryService;
 import cn.lightina.GrabOrders.pojo.Category;
+import cn.lightina.GrabOrders.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
@@ -17,7 +18,7 @@ import com.alibaba.fastjson.JSONObject;
 @RequestMapping("")
 public class CategoryController {
     @Autowired
-    CategoryService categoryService;
+    private CategoryService categoryService;
 
     @RequestMapping("/listCategory")
     public ModelAndView listCategory(){

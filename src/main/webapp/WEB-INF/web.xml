@@ -12,14 +12,14 @@
   <!-- spring配置-->
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:applicationContext.xml</param-value>
+    <param-value>classpath:spring/spring-source.xml,classpath:spring/spring-mybatis.xml</param-value>
   </context-param>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
 
+  <!--
 
-  <!-- log4j2-begin -->
   <listener>
     <listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
   </listener>
@@ -35,16 +35,17 @@
     <dispatcher>INCLUDE</dispatcher>
     <dispatcher>ERROR</dispatcher>
   </filter-mapping>
-  <!-- log4j2-end -->
+  -->
 
     <!-- servlet -->
   <servlet>
     <servlet-name>mvc-dispatcher</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <!-- spring mvc -->
+    <!--classpath:spring/spring-mybatis.xml,classpath:spring/spring-source.xml-->
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:spring/spring-mybatis.xml,classpath:spring/spring-source.xml</param-value>
+      <param-value>classpath:springMVC.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>

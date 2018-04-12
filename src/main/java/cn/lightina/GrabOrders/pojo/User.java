@@ -7,12 +7,7 @@ public class User implements Serializable{
     private int userId;
     private String userName;
     private String passWd;
-    User(){}
-    User(int userId,String userName,String passWd){
-        this.userId=userId;
-        this.userName=userName;
-        this.passWd=passWd;
-    }
+
     public int getUserId() {
         return userId;
     }

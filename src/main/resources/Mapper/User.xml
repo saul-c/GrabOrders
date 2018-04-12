@@ -10,4 +10,9 @@
     <select id="getUserById" parameterType="int" resultType="User" useCache="true">
         select * from GO_USER where userid = #{id}
     </select>
+
+    <insert id="addUser" parameterType="User">
+        insert into user_ where (userid)=#{userId} and (username)=#{userName} and(passWd)=#{passWd}
+    </insert>
+
 </mapper>
