@@ -18,9 +18,10 @@ public class UserController {
     public ModelAndView listUser(){
         ModelAndView mav=new ModelAndView();
         User temp=new User();
-        temp.setUserId(1);
+        temp.setUserId(4);
+        temp.setUserName("jerry");
         temp.setPassWd("123");
-        temp.setUserName("user1");
+        userService.addUser(temp);
         User user=userService.getUserById(1);
         mav.addObject("user",user);
         mav.setViewName("testUserMapper");
