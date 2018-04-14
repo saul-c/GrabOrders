@@ -8,19 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <table align='center' border='1' cellspacing='0'>
-        <tr>
-            <td>id</td>
-            <td>name</td>
-        </tr>
-        <c:forEach items="${user}" var="c" varStatus="st">
-            <tr>
-                <td>${c.userId}</td>
-                <td>${c.name}</td>
-
-            </tr>
-        </c:forEach>
-    </table>
+    <h1>${user.userId}</h1>
+    <h1>${user.userName}</h1>
+    <h1>${user.passWd}</h1>
 </head>
 <body>
 

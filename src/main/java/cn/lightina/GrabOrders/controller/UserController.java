@@ -21,8 +21,8 @@ public class UserController {
         temp.setUserId(4);
         temp.setUserName("jerry");
         temp.setPassWd("123");
-        userService.addUser(temp);
-        User user=userService.getUserById(1);
+        //userService.addUser(temp);
+        User user=userService.getUserById(2);
         mav.addObject("user",user);
         mav.setViewName("testUserMapper");
         return mav;

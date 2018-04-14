@@ -2,53 +2,54 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://java.sun.com/xml/ns/javaee"
          xmlns:web="http://java.sun.com/xml/ns/javaee"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
 
-  <!-- 初始界面-->
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-  </welcome-file-list>
+    <!-- 初始界面-->
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
 
-  <!-- spring配置-->
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:spring/spring-source.xml,classpath:spring/spring-mybatis.xml</param-value>
-  </context-param>
-  <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
+    <!-- spring配置-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring/spring-source.xml,classpath:spring/spring-mybatis.xml</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
-  <!--
+    <!--
 
-  <listener>
-    <listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
-  </listener>
-  <filter>
-    <filter-name>log4jServletFilter</filter-name>
-    <filter-class>org.apache.logging.log4j.web.Log4jServletFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>log4jServletFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-    <dispatcher>REQUEST</dispatcher>
-    <dispatcher>FORWARD</dispatcher>
-    <dispatcher>INCLUDE</dispatcher>
-    <dispatcher>ERROR</dispatcher>
-  </filter-mapping>
-  -->
+    <listener>
+      <listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
+    </listener>
+    <filter>
+      <filter-name>log4jServletFilter</filter-name>
+      <filter-class>org.apache.logging.log4j.web.Log4jServletFilter</filter-class>
+    </filter>
+    <filter-mapping>
+      <filter-name>log4jServletFilter</filter-name>
+      <url-pattern>/*</url-pattern>
+      <dispatcher>REQUEST</dispatcher>
+      <dispatcher>FORWARD</dispatcher>
+      <dispatcher>INCLUDE</dispatcher>
+      <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+    -->
 
     <!-- servlet -->
-  <servlet>
-    <servlet-name>mvc-dispatcher</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <!-- spring mvc -->
-    <!--classpath:spring/spring-mybatis.xml,classpath:spring/spring-source.xml-->
-    <init-param>
-      <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:springMVC.xml</param-value>
-    </init-param>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
+    <servlet>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- spring mvc -->
+        <!--classpath:spring/spring-mybatis.xml,classpath:spring/spring-source.xml-->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:springMVC.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>default</servlet-name>
@@ -67,9 +68,20 @@
         <url-pattern>*.html</url-pattern>
     </servlet-mapping>
 
-  <servlet-mapping>
-    <servlet-name>mvc-dispatcher</servlet-name>
-    <url-pattern>/</url-pattern>
-  </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+
+    <!--Druid监控-->
+    <servlet>
+        <servlet-name>DruidStatView</servlet-name>
+        <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DruidStatView</servlet-name>
+        <url-pattern>/druid/*</url-pattern>
+    </servlet-mapping>
 
 </web-app>
