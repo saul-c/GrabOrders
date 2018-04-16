@@ -4,8 +4,8 @@ import java.math.BigInteger;
 import java.util.Date;
 
 public class SuccessGrabbed {
-    private BigInteger userId; //用户唯一标识符
-    private BigInteger orderId; //物品唯一标识符
+    private int userId; //用户唯一标识符
+    private int orderId; //物品唯一标识符
     private Date createTime; //抢单创建时间
 
     @Override
@@ -17,19 +17,19 @@ public class SuccessGrabbed {
                 '}';
     }
 
-    public BigInteger getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(BigInteger userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    public BigInteger getOrderId() {
+    public int getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(BigInteger orderId) {
+    public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
 
