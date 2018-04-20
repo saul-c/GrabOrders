@@ -7,6 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 public interface GrabService {
-    
+    GrabExecution executeGrab(int orderId,int userId,String md5);
 
 }
