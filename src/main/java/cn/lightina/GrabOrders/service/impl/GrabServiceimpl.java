@@ -6,11 +6,14 @@ import cn.lightina.GrabOrders.Exception.OrderException;
 import cn.lightina.GrabOrders.dao.OrderMapper;
 import cn.lightina.GrabOrders.dao.SuccessGrabbedMapper;
 import cn.lightina.GrabOrders.pojo.GrabExecution;
+import cn.lightina.GrabOrders.pojo.Order;
 import cn.lightina.GrabOrders.pojo.SuccessGrabbed;
 import cn.lightina.GrabOrders.service.GrabService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Date;
 
 @Service
@@ -46,4 +49,8 @@ public class GrabServiceimpl implements GrabService {
         return s;
     }
 
+    public List<Order> list() {
+        List<Order>list=ordermapper.list();
+        return list;
+    }
 }
