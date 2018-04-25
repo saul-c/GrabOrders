@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 @Controller
 @RequestMapping("/graborder")
@@ -20,9 +23,15 @@ public class GrabController {
         model.addAttribute("list",list);
         return "list";
     }
-    /*@RequestMapping(value = "/time/now",method = RequestMethod.GET)
-    todo
+
+    @RequestMapping(value = "/time/now",method = RequestMethod.GET)
+    GrabResult<Date> getTime(Model model) {
+        Date d = new Date();
+        GrabResult<Date> gr =new GrabResult<>();
+        gr.setData(d);
+        return gr;
+    }
 
 
-    */
+
 }

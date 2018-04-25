@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface GrabService {
     GrabExecution executeGrab(int orderId,int userId,String md5);
+    Exposer getUrl(int orderId);
     List<Order> list();
 }

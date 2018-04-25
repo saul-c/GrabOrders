@@ -5,6 +5,7 @@ import cn.lightina.GrabOrders.Exception.GrabFinishException;
 import cn.lightina.GrabOrders.Exception.OrderException;
 import cn.lightina.GrabOrders.dao.OrderMapper;
 import cn.lightina.GrabOrders.dao.SuccessGrabbedMapper;
+import cn.lightina.GrabOrders.pojo.Exposer;
 import cn.lightina.GrabOrders.pojo.GrabExecution;
 import cn.lightina.GrabOrders.pojo.Order;
 import cn.lightina.GrabOrders.pojo.SuccessGrabbed;
@@ -43,7 +44,7 @@ public class GrabServiceimpl implements GrabService {
             throw e2;
         }
     }
-    String getmd5(long orderId) {
+    private String getmd5(long orderId) {
         String base=orderId+"/"+confusion;
         String s = DigestUtils.md5Hex(base.getBytes());
         return s;
@@ -52,5 +53,17 @@ public class GrabServiceimpl implements GrabService {
     public List<Order> list() {
         List<Order>list=ordermapper.list();
         return list;
+    }
+
+    @Override
+    public Exposer getUrl(int orderId) {
+        Order order=ordermapper.queryById(orderId);
+        if(order==null)return new Exposer(false,orderId);
+        long s=order.getStartTime().getTime();
+        long e=order.getEndTime().getTime();
+        long now=new Date().getTime();
+        if(now<s||now>e)return new Exposer(false,orderId,now,s,e);
+        String md5=getmd5(orderId);
+        return new Exposer(false,md5,orderId,now,s,e);
     }
 }
