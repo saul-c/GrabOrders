@@ -14,6 +14,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Date;
 
@@ -25,6 +26,8 @@ public class GrabServiceimpl implements GrabService {
 
     @Autowired
     private SuccessGrabbedMapper successGrabbedMapper;
+
+    @Transactional
     public GrabExecution executeGrab(int orderId,int userId, String md5) throws OrderException{
         if(md5==null||md5!=getmd5(orderId))throw new OrderException("数据内容被修改");
         Date now=new Date();

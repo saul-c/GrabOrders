@@ -5,7 +5,7 @@
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:task="http://www.springframework.org/schema/task" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
       http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
       http://www.springframework.org/schema/util
@@ -15,11 +15,19 @@
       http://www.springframework.org/schema/aop
       http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
       http://www.springframework.org/schema/context
-      http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+      http://www.springframework.org/schema/context/spring-context-4.3.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <context:annotation-config />
     <context:component-scan base-package="cn.lightina.GrabOrders.service" />
 
     <!-- 引入dbconfig.properties属性文件 -->
     <context:property-placeholder location="classpath:*.properties" />
-</beans>
+
+    <!-- 配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!-- 通过注解来声明事务-->
+    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+    </beans>
