@@ -10,23 +10,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import sun.reflect.annotation.ExceptionProxy;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @Controller
-@RequestMapping("/graborder")
+@RequestMapping("/graborders")
 public class GrabController {
     @Autowired
     GrabService grabService;
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
-    String listOrder(Model model){
-        //列表页
+    @ResponseBody
+    List<Order> listOrder(){
+        //列表页所需信息
         List<Order>list=grabService.list();
-        model.addAttribute("list",list);
-        return "list";
+
+        return list;
     }
 
     @RequestMapping(value = "/time/now",method = RequestMethod.GET)
@@ -38,7 +38,7 @@ public class GrabController {
 
     @RequestMapping(value="/{orderId}/exposer",
             method = RequestMethod.GET,
-            produces = {"application/json,charset=UTF-8"})
+            produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     GrabResult<Exposer>getExposer(@PathVariable("orderId")Integer orderId){
         if(orderId==null)return new GrabResult<Exposer>(false,"orderId为null");

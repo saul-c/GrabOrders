@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.lightina.GrabOrders.dao.OrderMapper">
-    <select id="list" resultType="Category">
-        select * from  order_
+    <select id="list" resultType="Order">
+        select * from  order_info
     </select>
 
 </mapper>
