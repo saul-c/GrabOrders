@@ -25,7 +25,6 @@ public class GrabController {
     List<Order> listOrder(){
         //列表页所需信息
         List<Order>list=grabService.list();
-
         return list;
     }
 
