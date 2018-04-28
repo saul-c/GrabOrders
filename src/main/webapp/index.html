@@ -2,22 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>抢单系统</title>
+    <title>订单显示页</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <div id="header"></div>
 </head>
-
 <body>
 <div class="container">
-    <div class="show-product">
-        <h2 class="show-product-text">下一件商品</h2>
-        <img src="./lib/images/temp.jpg" alt="leader" height="300" width="300" ><br>
-        <div class="time-item">
-            <strong id="hour_show">0时</strong>
-            <strong id="minute_show">0分</strong>
-            <strong id="second_show">0秒</strong>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title" style="text-align:center;">订单信息</h3>
         </div>
-        <!--<form method="post" action="grabOrder">submit</form>-->
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>订单信息</th>
+                <th>数量</th>
+                <th>开启时间(GMT+8):</th>
+                <th>结束时间(GMT+8):</th>
+                <th>抢购页</th>
+            </tr>
+            </thead>
+            <tbody id="table-info">
+            </tbody>
+        </table>
     </div>
 </div>
-<script type="text/javascript" src="./lib/js/countdown.js"/>
+
+<div id="footer"></div>
+<script type="text/javascript" src="./lib/js/loader.js"></script>
+<script type="text/javascript" src="./lib/js/graborders.js"></script>
+<script>
+    graborders.ajax.getlist();
+</script>
 </body>
 </html>

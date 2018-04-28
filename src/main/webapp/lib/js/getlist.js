@@ -11,9 +11,10 @@ $(document).ready(function() {
                 s.append('<tr>');
                 s.append('<td>'+result[i].info+'</td>');
                 s.append('<td>'+result[i].number+'</td>');
-                s.append('<td>'+result[i].createTime+'</td>');
                 s.append('<td>'+result[i].startTime+'</td>');
                 s.append('<td>'+result[i].endTime+'</td>');
+                s.append('<td><a class="btn btn-info" href="graborders/') +
+                s.append(result[i].orderId+'/detail" target="_blank">抢购</a></td>')
                 s.append('</tr>');
             }
             $('#table-info').html(s.toString());

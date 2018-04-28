@@ -1,9 +1,11 @@
 package cn.lightina.GrabOrders.controller;
 
+import cn.lightina.GrabOrders.Exception.GrabException;
 import cn.lightina.GrabOrders.service.GrabService;
 import cn.lightina.GrabOrders.pojo.*;
 import org.junit.runners.Parameterized;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,10 +30,20 @@ public class GrabController {
         return list;
     }
 
+    @RequestMapping(value="/{orderId}/detail",method = RequestMethod.GET)
+    String getOrderDetail(Model model,@PathVariable Integer orderId)
+            throws GrabException{
+        if(orderId==null){
+            return "redirect:yourwebserver/index.html";
+        }
+
+        return "";
+    }
+
     @RequestMapping(value = "/time/now",method = RequestMethod.GET)
     GrabResult<Date> getTime(Model model) {
         Date d = new Date();
-        GrabResult<Date> gr =new GrabResult<Date>(true,d);
+        GrabResult<Date> gr =new GrabResult<>(true,d);
         return gr;
     }
 
