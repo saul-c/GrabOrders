@@ -1,3 +1,4 @@
+
 var intDiff = parseInt(55);//倒计时总秒数量
 function timer(intDiff){
     window.setInterval(function(){

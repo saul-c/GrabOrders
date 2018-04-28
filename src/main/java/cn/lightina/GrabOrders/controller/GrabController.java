@@ -36,12 +36,17 @@ public class GrabController {
         if(orderId==null){
             return "redirect:yourwebserver/index.html";
         }
-
-        return "";
+        Order order=grabService.queryById(orderId);
+        if(order==null){
+            return "redirect:yourwebserver/index.html";
+        }
+        model.addAttribute("order",order);
+        return "orderdetail";
     }
 
     @RequestMapping(value = "/time/now",method = RequestMethod.GET)
-    GrabResult<Date> getTime(Model model) {
+    @ResponseBody
+    GrabResult<Date> getTime() {
         Date d = new Date();
         GrabResult<Date> gr =new GrabResult<>(true,d);
         return gr;

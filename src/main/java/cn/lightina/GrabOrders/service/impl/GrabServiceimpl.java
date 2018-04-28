@@ -58,6 +58,11 @@ public class GrabServiceimpl implements GrabService {
         return list;
     }
 
+    public Order queryById(int orderId){
+        Order order=ordermapper.queryById(orderId);
+        return order;
+    }
+
     @Override
     public Exposer getUrl(int orderId) {
         Order order=ordermapper.queryById(orderId);

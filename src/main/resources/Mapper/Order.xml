@@ -8,4 +8,7 @@
         select * from  order_info
     </select>
 
+    <select id="queryById" resultType="Order" parameterType="int">
+        select * from order_info where order_id=#{orderId}
+    </select>
 </mapper>
