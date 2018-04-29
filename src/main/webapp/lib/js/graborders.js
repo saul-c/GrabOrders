@@ -10,8 +10,8 @@ var graborders={
         getexposer:function (orderId) {
             return "/graborders/"+orderId+"/exposer";
         },
-        execution:function (orederId,md5) {
-            return "/graborders/"+orderId+md5+"/execution";
+        execution:function (orderId,md5) {
+            return "/graborders/"+orderId+"/"+md5+"/execution";
         }
     },
     ajax:{
@@ -86,12 +86,14 @@ var graborders={
                     var exposer=result['data'];
                     if(exposer['exposed']){
                         var md5=exposer['md5'];
+                        var orderId=exposer['orderId'];
                         $('#btn').attr('disabled',false);
                         $('#btn').one('click',function () {
-                            alert('yeah');
-                            /*execution
-                            TODO
-                             */
+                            $('#btn').attr('disabled',true);
+                            $(function () {
+                                alert('yeah');
+                                graborders.orderdetail.execution(orderId,md5);
+                            })
                         })
                     }else{
                         var nowTime=exposer['nowTime'];
@@ -105,6 +107,15 @@ var graborders={
                 }
             })
         },
+        execution:function (orderId,md5) {
+            $.post(graborders.URL.execution(orderId,md5),{},function (result) {
+                if(result['success']){
+                    alert("秒杀成功！");
+                }else{
+                    alert("秒杀失败！");
+                }
+            },"json")
+        }
     }
 
 }

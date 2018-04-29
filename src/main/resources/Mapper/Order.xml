@@ -11,4 +11,14 @@
     <select id="queryById" resultType="Order" parameterType="int">
         select * from order_info where order_id=#{orderId}
     </select>
+
+    <update id="reduceNumber">
+        UPDATE order_info
+        SET number = number-1
+        WHERE order_id = #{orderId}
+        AND unix_timestamp(start_time)*1000 <![CDATA[ <= ]]> #{nowTime}
+        AND unix_timestamp(end_time)*1000 >= #{nowTime}
+        AND number > 0;
+    </update>
+
 </mapper>

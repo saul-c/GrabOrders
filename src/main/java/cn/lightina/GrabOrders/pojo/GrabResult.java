@@ -1,9 +1,9 @@
 package cn.lightina.GrabOrders.pojo;
 
 public class GrabResult<T> {
-    boolean success;
-    T data;
-    String errorinfo;
+    private boolean success;
+    private T data;
+    private String errorinfo;
 
     public GrabResult(boolean success, T data) {
         this.success = success;

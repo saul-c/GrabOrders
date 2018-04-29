@@ -1,6 +1,7 @@
 package cn.lightina.GrabOrders.controller;
 
 import cn.lightina.GrabOrders.Exception.GrabException;
+import cn.lightina.GrabOrders.Exception.OrderException;
 import cn.lightina.GrabOrders.service.GrabService;
 import cn.lightina.GrabOrders.pojo.*;
 import org.junit.runners.Parameterized;
@@ -68,4 +69,19 @@ public class GrabController {
         return gr;
     }
 
+    @RequestMapping(value="/{orderId}/{md5}/execution",
+            method = RequestMethod.POST,
+            produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    GrabResult<SuccessGrabbed> execution(@PathVariable("orderId")Integer orderId,
+                            @PathVariable("md5")String md5) {
+        GrabResult<SuccessGrabbed>gr;
+        try {
+            SuccessGrabbed ge=grabService.executeGrab(orderId,1,md5);
+            return new GrabResult<>(true,ge);
+        } catch (Exception e) {
+            return new GrabResult<>(false,"error happen");
+        }
+
+    }
 }

@@ -6,7 +6,6 @@ import cn.lightina.GrabOrders.Exception.OrderException;
 import cn.lightina.GrabOrders.dao.OrderMapper;
 import cn.lightina.GrabOrders.dao.SuccessGrabbedMapper;
 import cn.lightina.GrabOrders.pojo.Exposer;
-import cn.lightina.GrabOrders.pojo.GrabExecution;
 import cn.lightina.GrabOrders.pojo.Order;
 import cn.lightina.GrabOrders.pojo.SuccessGrabbed;
 import cn.lightina.GrabOrders.service.GrabService;
@@ -28,19 +27,16 @@ public class GrabServiceimpl implements GrabService {
     private SuccessGrabbedMapper successGrabbedMapper;
 
     @Transactional
-    public GrabExecution executeGrab(int orderId,int userId, String md5) throws OrderException{
-        if(md5==null||md5!=getmd5(orderId))throw new OrderException("数据内容被修改");
-        Date now=new Date();
+    public SuccessGrabbed executeGrab(int orderId,int userId, String md5) throws OrderException{
+        if(md5==null||!md5.equals(getmd5(orderId)))throw new OrderException("数据内容被修改");
+        Date nowTime=new Date();
         try {
-            int surplus = ordermapper.reduceNumber(orderId, now);
+            int surplus = ordermapper.reduceNumber(orderId, nowTime.getTime());
             if (surplus <= 0) throw new GrabFinishException("抢单结束");
-            SuccessGrabbed sg=new SuccessGrabbed();
-            sg.setOrderId(orderId);
-            sg.setCreateTime(now);
-            sg.setUserId(userId);
+            SuccessGrabbed sg=new SuccessGrabbed(orderId,userId,nowTime);
             int insertcount=successGrabbedMapper.insertInfo(sg);
-            if(insertcount<=0)throw new GrabException("");
-            return null;
+            if(insertcount<=0)throw new GrabException("写信息失败");
+            return sg;
         }catch (OrderException e1){
             throw e1;
         }catch (GrabFinishException e2){
