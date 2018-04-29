@@ -23,17 +23,20 @@
             <h3 class="panel-title" style="text-align:center;"><%=order.getInfo()%></h3>
         </div>
     </div>
+    <div class="show-product" align="center">
+        <div class="time-item">
+            <strong>抢购倒计时:</strong>
+            <strong id="day_show">0天</strong>
+            <strong id="hour_show">0时</strong>
+            <strong id="minute_show">0分</strong>
+            <strong id="second_show">0秒</strong>
+        </div>
+    </div>
+    <div align="center" id="message"></div>
+    <div align="center" style="margin-top:30px;"><button class="btn btn-primary btn-lg" id="btn" disabled="disabled">立即抢购</button></div>
 </div>
 
-<div class="show-product" align="center">
-    <link>
-    <div class="time-item">
-        <strong id="day_show">0天</strong>
-        <strong id="hour_show">0时</strong>
-        <strong id="minute_show">0分</strong>
-        <strong id="second_show">0秒</strong>
-    </div>
-</div>
+
 
 <div id="footer"></div>
 <script type="text/javascript" src="/lib/js/loader.js"></script>
@@ -41,6 +44,7 @@
 <script>
     $(function () {
         graborders.orderdetail.init({
+            orderId:${order.orderId},
             startTime: ${order.startTime.time},
             endTime: ${order.endTime.time}
         });

@@ -53,7 +53,7 @@ public class GrabController {
     }
 
     @RequestMapping(value="/{orderId}/exposer",
-            method = RequestMethod.GET,
+            method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     GrabResult<Exposer>getExposer(@PathVariable("orderId")Integer orderId){

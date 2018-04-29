@@ -72,7 +72,7 @@ public class GrabServiceimpl implements GrabService {
         long now=new Date().getTime();
         if(now<s||now>e)return new Exposer(false,orderId,now,s,e);
         String md5=getmd5(orderId);
-        return new Exposer(false,md5,orderId,now,s,e);
+        return new Exposer(true,md5,orderId,now,s,e);
     }
 
 

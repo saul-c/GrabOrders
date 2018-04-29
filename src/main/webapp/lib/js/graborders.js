@@ -2,10 +2,16 @@
 var graborders={
     URL:{
         getlist:function () {
-          return "/graborders/list";
+            return "/graborders/list";
         },
         gettime:function () {
-           return "/graborders/time/now";
+            return "/graborders/time/now";
+        },
+        getexposer:function (orderId) {
+            return "/graborders/"+orderId+"/exposer";
+        },
+        execution:function (orederId,md5) {
+            return "/graborders/"+orderId+md5+"/execution";
         }
     },
     ajax:{
@@ -31,22 +37,25 @@ var graborders={
             * TODO*/
             var startTime=order['startTime'];
             var endTime=order['endTime'];
+            var orderId=order['orderId'];
             $.get(graborders.URL.gettime(),{},function (result) {
                 var nowTime=result["data"];
                 if(nowTime>endTime){
-
+                    $('#message').html('<h2>对不起,您来晚了,秒杀已结束!</h2>');
                 }else if(nowTime<startTime){
                     var count=parseInt((startTime-nowTime)/1000);
                     $(function () {
-                        graborders.orderdetail.countdown(count);
+                        graborders.orderdetail.countdown(count,orderId);
                     })
                 }else{
-
+                    $(function () {
+                        graborders.orderdetail.getexposer(orderId);
+                    })
                 }
             },"json")
         },
-        countdown:function timer(intDiff){
-            window.setInterval(function(){
+        countdown:function timer(intDiff,orderId){
+            var interval=window.setInterval(function(){
                 var day=0,
                     hour=0,
                     minute=0,
@@ -56,6 +65,11 @@ var graborders={
                     hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
                     minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
                     second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+                }else{
+                    $(function () {
+                        clearInterval(interval);
+                        graborders.orderdetail.getexposer(orderId);
+                    })
                 }
                 if (minute <= 9) minute = '0' + minute;
                 if (second <= 9) second = '0' + second;
@@ -65,7 +79,32 @@ var graborders={
                 $('#second_show').html('<s></s>'+second+'秒');
                 intDiff--;
             }, 1000);
-        }
+        },
+        getexposer:function (orderId) {
+            $.post(graborders.URL.getexposer(orderId),{},function (result) {
+                if(result['success']){
+                    var exposer=result['data'];
+                    if(exposer['exposed']){
+                        var md5=exposer['md5'];
+                        $('#btn').attr('disabled',false);
+                        $('#btn').one('click',function () {
+                            alert('yeah');
+                            /*execution
+                            TODO
+                             */
+                        })
+                    }else{
+                        var nowTime=exposer['nowTime'];
+                        var startTime=exposer['startTime'];
+                        var endTime=exposer['endTime'];
+                        $(function () {
+                            var count=parseInt((startTime-nowTime)/1000);
+                            graborders.orderdetail.countdown(count,orderId);
+                        })
+                    }
+                }
+            })
+        },
     }
 
 }
