@@ -91,7 +91,6 @@ var graborders={
                         $('#btn').one('click',function () {
                             $('#btn').attr('disabled',true);
                             $(function () {
-                                alert('yeah');
                                 graborders.orderdetail.execution(orderId,md5);
                             })
                         })

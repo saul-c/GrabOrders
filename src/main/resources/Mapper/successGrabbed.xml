@@ -5,7 +5,7 @@
 
 <mapper namespace="cn.lightina.GrabOrders.dao.SuccessGrabbedMapper">
     <insert id="insertInfo" parameterType="SuccessGrabbed">
-        INSERT into user_order
+        INSERT IGNORE into user_order
         (user_id,order_id,create_time)
         VALUES
         (#{sg.userId},#{sg.orderId},#{sg.createTime})

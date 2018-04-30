@@ -8,6 +8,7 @@ import cn.lightina.GrabOrders.dao.SuccessGrabbedMapper;
 import cn.lightina.GrabOrders.pojo.Exposer;
 import cn.lightina.GrabOrders.pojo.Order;
 import cn.lightina.GrabOrders.pojo.SuccessGrabbed;
+import cn.lightina.GrabOrders.redis.OrderRedis;
 import cn.lightina.GrabOrders.service.GrabService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +22,20 @@ import java.util.Date;
 public class GrabServiceimpl implements GrabService {
     private String confusion="neverceasetocelebratelife";
     @Autowired
-    private OrderMapper ordermapper;
+    private OrderMapper orderMapper;
 
     @Autowired
     private SuccessGrabbedMapper successGrabbedMapper;
+
+    @Autowired
+    private OrderRedis orderRedis;
 
     @Transactional
     public SuccessGrabbed executeGrab(int orderId,int userId, String md5) throws OrderException{
         if(md5==null||!md5.equals(getmd5(orderId)))throw new OrderException("数据内容被修改");
         Date nowTime=new Date();
         try {
-            int surplus = ordermapper.reduceNumber(orderId, nowTime.getTime());
+            int surplus = orderMapper.reduceNumber(orderId, nowTime.getTime());
             if (surplus <= 0) throw new GrabFinishException("抢单结束");
             SuccessGrabbed sg=new SuccessGrabbed(orderId,userId,nowTime);
             int insertcount=successGrabbedMapper.insertInfo(sg);
@@ -50,18 +54,28 @@ public class GrabServiceimpl implements GrabService {
     }
 
     public List<Order> list() {
-        List<Order>list=ordermapper.list();
+        List<Order>list= orderMapper.list();
         return list;
     }
 
     public Order queryById(int orderId){
-        Order order=ordermapper.queryById(orderId);
+        Order order= orderMapper.queryById(orderId);
         return order;
     }
 
     @Override
     public Exposer getUrl(int orderId) {
-        Order order=ordermapper.queryById(orderId);
+        /*
+        * Order可用redis进行缓存 减少mysql压力
+        * */
+        Order order=orderRedis.getOrder(orderId);
+        if(order==null){
+            order=orderMapper.queryById(orderId);
+            if(order!=null){
+                String res=orderRedis.putOrder(order);
+            }
+        }
+        //Order order=orderMapper.queryById(orderId);
         if(order==null)return new Exposer(false,orderId);
         long s=order.getStartTime().getTime();
         long e=order.getEndTime().getTime();

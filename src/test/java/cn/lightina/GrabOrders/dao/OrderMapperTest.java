@@ -1,5 +1,6 @@
 package cn.lightina.GrabOrders.dao;
 
+import cn.lightina.GrabOrders.pojo.Order;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,12 @@ public class OrderMapperTest {
         Date date=new Date();
         int updateCount=orderMapper.reduceNumber(orderId,date.getTime());
         System.out.println(updateCount);
+    }
+
+    @Test
+    public void queryById(){
+        int orderId=6;
+        Order order1=orderMapper.queryById(orderId);
+        System.out.print(order1);
     }
 }

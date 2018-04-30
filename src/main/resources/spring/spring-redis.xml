@@ -49,4 +49,8 @@
                     class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
         </property>
     </bean>
+
+    <bean id="redisDao" class="cn.lightina.GrabOrders.redis.OrderRedis">
+
+    </bean>
 </beans>
