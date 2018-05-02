@@ -8,7 +8,7 @@ public class SuccessGrabbed {
     private int orderId; //物品唯一标识符
     private Date createTime; //抢单创建时间
 
-    public SuccessGrabbed(int userId, int orderId, Date createTime) {
+    public SuccessGrabbed(int orderId, int userId, Date createTime) {
         this.userId = userId;
         this.orderId = orderId;
         this.createTime = createTime;

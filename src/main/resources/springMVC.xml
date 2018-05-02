@@ -18,6 +18,10 @@
                                 expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
+    <!--aop-->
+    <aop:aspectj-autoproxy proxy-target-class="true">
+    </aop:aspectj-autoproxy>
+
     <!--<mvc:annotation-driven >
         <mvc:message-converters register-defaults="true">
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">

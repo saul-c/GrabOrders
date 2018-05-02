@@ -20,6 +20,9 @@
     <context:annotation-config />
     <context:component-scan base-package="cn.lightina.GrabOrders.service" />
 
+    <!--自动搜索切面类-->
+    <context:component-scan base-package="cn.lightina.GrabOrders.aop"/>
+
     <!-- 引入dbconfig.properties属性文件 -->
     <context:property-placeholder location="classpath:*.properties" />
 
@@ -30,4 +33,5 @@
 
     <!-- 通过注解来声明事务-->
     <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+
     </beans>
