@@ -2,7 +2,8 @@ package cn.lightina.GrabOrders.service;
 
 import cn.lightina.GrabOrders.pojo.User;
 
-public interface UserService {
+public interface LoginService {
     User getUserById(int id);
-    void addUser(User user);
+    int addUser(User user);
+    User checkLogin(User user);
 }

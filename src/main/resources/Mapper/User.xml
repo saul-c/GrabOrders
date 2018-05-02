@@ -8,11 +8,14 @@
     <cache type="cn.lightina.GrabOrders.redis.RedisCache" />
 
     <select id="getUserById" parameterType="int" resultType="User" useCache="true">
-        select userid userId,username userName,passwd passWd from user where userId = #{id}
+        select userid userId,username userName,passwd passWd from user where userId = #{userId}
     </select>
 
     <insert id="addUser" parameterType="User">
         insert into user (userid,username,passwd) values(null,#{userName},#{passWd})
     </insert>
 
+    <select id="checkLogin" parameterType="User" resultType="User">
+        select * from user_info where userId=#{user.user_id} and passWd=#{user.passWd};
+    </select>
 </mapper>

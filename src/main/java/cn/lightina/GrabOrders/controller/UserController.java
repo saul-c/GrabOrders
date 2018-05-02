@@ -1,36 +1,40 @@
 package cn.lightina.GrabOrders.controller;
 
 
+import cn.lightina.GrabOrders.jwt.Token;
+import cn.lightina.GrabOrders.pojo.LoginResult;
 import cn.lightina.GrabOrders.pojo.User;
-import cn.lightina.GrabOrders.service.UserService;
+import cn.lightina.GrabOrders.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("")
+@RequestMapping("/graborders")
 public class UserController {
     @Autowired
-    private UserService userService;
+    private LoginService loginService;
 
-    @RequestMapping("/getUser")
-    public ModelAndView listUser(){
-        ModelAndView mav=new ModelAndView();
-        User temp=new User();
-        temp.setUserId(4);
-        temp.setUserName("jerry");
-        temp.setPassWd("123");
-        //userService.addUser(temp);
-        User user=userService.getUserById(2);
-        mav.addObject("user",user);
-        mav.setViewName("testUserMapper");
-        return mav;
+
+    @RequestMapping(value = "/login",
+            method = RequestMethod.GET,
+            produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public LoginResult<Token> login(@RequestBody User user){
+        LoginResult<Token>lr;
+        try {
+            User u = loginService.checkLogin(user);
+            if (u == null) return new LoginResult<>(false, "user not found");
+            // TODO: 2018/5/2 get token
+            Token t=new Token("todo");
+            lr=new LoginResult<>(true,t);
+        }catch (Exception e){
+            lr=new LoginResult<>(false,"登陆失败");
+        }
+        return lr;
     }
-
-
-    /*public ModelAndView getUserById(){
-        ModelAndView mav=new ModelAndView();
-        return mav;
-    }*/
 }

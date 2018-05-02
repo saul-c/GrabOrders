@@ -73,15 +73,16 @@ public class GrabController {
             method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    GrabResult<SuccessGrabbed> execution(@PathVariable("orderId")Integer orderId,
-                            @PathVariable("md5")String md5) {
-        GrabResult<SuccessGrabbed>gr;
+    GrabResult<SuccessGrabbed> execution(
+            @PathVariable("orderId")Integer orderId,
+            @PathVariable("md5")String md5) {
+        GrabResult<SuccessGrabbed> gr;
         try {
-            SuccessGrabbed ge=grabService.executeGrab(orderId,1,md5);
-            return new GrabResult<>(true,ge);
+            SuccessGrabbed sg=grabService.executeGrab(orderId,1,md5);
+            gr=new GrabResult<>(true,sg);
         } catch (Exception e) {
-            return new GrabResult<>(false,"error happen");
+            gr=new GrabResult<>(false,"error happen");
         }
-
+        return gr;
     }
 }

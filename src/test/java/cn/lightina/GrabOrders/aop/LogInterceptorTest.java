@@ -29,4 +29,24 @@ public class LogInterceptorTest {
         LogInterceptorTest lt=new LogInterceptorTest();
         lt.print();
     }
+
+    public int ex(){
+        int b=111;
+        try{
+            b=2/0;
+            return 222;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 333;
+        }finally {
+            System.out.println('h');
+            return 444;
+        }
+    }
+
+    @Test
+    public void s(){
+        int c=ex();
+        System.out.println(c);
+    }
 }
