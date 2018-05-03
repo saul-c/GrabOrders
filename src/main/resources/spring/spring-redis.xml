@@ -50,7 +50,9 @@
         </property>
     </bean>
 
-    <bean id="redisDao" class="cn.lightina.GrabOrders.redis.OrderRedis">
+    <bean id="redisOrderDao" class="cn.lightina.GrabOrders.redis.OrderRedis">
+    </bean>
 
+    <bean id="redisTokenDao" class="cn.lightina.GrabOrders.redis.TokenRedis">
     </bean>
 </beans>

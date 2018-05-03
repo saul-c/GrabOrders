@@ -34,4 +34,6 @@
     <!-- 通过注解来声明事务-->
     <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
 
+    <!--登陆token工具类-->
+    <bean id="jwtUtil" class="cn.lightina.GrabOrders.jwt.JwtUtil"></bean>
     </beans>

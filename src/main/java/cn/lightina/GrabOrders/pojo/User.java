@@ -5,9 +5,14 @@ import java.io.Serializable;
 public class User implements Serializable{
     private static final long serialVersionUID = 1L;
     private int userId;
+    private String userName;
     private String phoneNumber;
     private String passWd;
     private String address;
+
+    public String getUserName() { return userName; }
+
+    public void setUserName(String userName) { this.userName = userName; }
 
     public String getAddress() {
         return address;
