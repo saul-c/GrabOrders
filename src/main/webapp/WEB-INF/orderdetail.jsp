@@ -10,9 +10,10 @@
 <html>
 <head>
     <title>订单详情页</title>
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="/lib/css/countdown.css" rel="stylesheet">
-    <div id="header"></div>
 </head>
 <body>
 
@@ -39,7 +40,6 @@
 
 
 <div id="footer"></div>
-<script type="text/javascript" src="/lib/js/loader.js"></script>
 <script type="text/javascript" src="/lib/js/graborders.js"></script>
 <script>
     $(function () {

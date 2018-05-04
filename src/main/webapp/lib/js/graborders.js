@@ -10,6 +10,9 @@ var graborders={
         getexposer:function (orderId) {
             return "/graborders/"+orderId+"/exposer";
         },
+        gettokenlogin:function (token) {
+            return "/graborders/"+token+"/login";
+        },
         execution:function (orderId,md5) {
             return "/graborders/"+orderId+"/"+md5+"/execution";
         }
@@ -115,8 +118,16 @@ var graborders={
                 }
             },"json")
         }
+    },
+    login:{
+        useTokenlogin:function (token) {
+            $.post(graborders.URL.gettokenlogin(token),{},function (result) {
+                /*if(result['success']){
+                    $('')
+                }*/
+            },"json")
+        }
     }
-
 }
 /*util*/
 function StringBuffer() {
@@ -130,3 +141,16 @@ StringBuffer.prototype.append = function (str) {
 StringBuffer.prototype.toString = function () {
     return this.__strings__.join("");
 };
+function setCookie(name,value) {
+    var Days = 30;
+    var exp = new Date();
+    exp.setTime(exp.getTime() + Days*24*60*60*1000);
+    document.cookie = name + "="+ encodeURI(value) + ";expires=" + exp.toGMTString();
+}
+function getCookie(name) {
+    var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+    if(arr=document.cookie.match(reg))
+        return decodeURI(arr[2]);
+    else
+        return null;
+}

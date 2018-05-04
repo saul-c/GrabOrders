@@ -25,7 +25,7 @@ public class UserController {
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public LoginResult<LoginInfo> login(
-            @RequestBody User user,
+            @RequestBody(required = false) User user,
             @PathVariable(value = "token",required = false)Token token){
         LoginResult<LoginInfo>lr;
         if(token!=null){
