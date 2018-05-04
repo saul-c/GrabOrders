@@ -16,6 +16,6 @@
     </insert>
 
     <select id="checkLogin" parameterType="User" resultType="User">
-        select * from user_info where userId=#{user.user_id} and passWd=#{user.passWd};
+        select * from user_info where userName=#{user.user_name} and passWd=#{user.passWd};
     </select>
 </mapper>
