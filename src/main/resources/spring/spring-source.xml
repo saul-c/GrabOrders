@@ -36,4 +36,14 @@
 
     <!--登陆token工具类-->
     <bean id="jwtUtil" class="cn.lightina.GrabOrders.jwt.JwtUtil"></bean>
+
+    <!--redisbean-->
+    <bean id="redisOrderDao" class="cn.lightina.GrabOrders.redis.OrderRedis">
+    </bean>
+
+    <bean id="redisTokenDao" class="cn.lightina.GrabOrders.redis.TokenRedis">
+    </bean>
+
     </beans>
+
+

@@ -26,14 +26,16 @@ public class UserController {
     @ResponseBody
     public LoginResult<LoginInfo> login(
             @RequestBody(required = false) User user,
-            @PathVariable(value = "token",required = false)Token token){
+            @PathVariable(value = "token",required = false)String tokenString){
         LoginResult<LoginInfo>lr;
-        if(token!=null){
+        if(tokenString!=null){
             /*有Token 检验Token*/
+            Token token=new Token(tokenString);
             try {
                 User u=loginService.checkToken(token);
-                /*隐藏userId*/
+                /*隐藏关键信息*/
                 u.setUserId(-1);
+                u.setPassWd(null);
                 lr = new LoginResult<>(true, new LoginInfo(u,token));
             }catch (Exception e){
                 lr = new LoginResult<>(false, "登陆失败");
@@ -45,9 +47,10 @@ public class UserController {
                 if (u == null) return new LoginResult<>(false, "user not found");
                 int userId = u.getUserId();
                 Token t = new Token(jwtUtil.createToken(user));
-                /*隐藏userId*/
+                /*隐藏关键信息*/
                 u.setUserId(-1);
-                lr = new LoginResult<>(true, new LoginInfo(u,token));
+                u.setPassWd(null);
+                lr = new LoginResult<>(true, new LoginInfo(u,t));
             } catch (Exception e) {
                 lr = new LoginResult<>(false, "登陆失败");
             }

@@ -63,7 +63,7 @@
                         <input class="form-control" type="password" placeholder="至少6位字母或数字">
                     </div>
                     <div class="text-right">
-                        <button class="btn btn-primary" type="submit">提交</button>
+                        <button class="btn btn-primary" type="button" id="btn-register">提交</button>
                         <button class="btn btn-danger" data-dismiss="modal">取消</button>
                     </div>
                     <a href="" data-toggle="modal" data-dismiss="modal" data-target="#login">已有账号？点我登录</a>
@@ -86,7 +86,7 @@
                 <h1 class="text-center">登录</h1>
             </div>
             <div class="modal-body">
-                <form class="form-group" action="">
+                <form class="form-group" id="form-login">
                     <div class="form-group">
                         <label>手机号码</label>
                         <input class="form-control" type="text" placeholder="">
@@ -96,7 +96,7 @@
                         <input class="form-control" type="password" placeholder="">
                     </div>
                     <div class="text-right">
-                        <button class="btn btn-primary" type="submit">登录</button>
+                        <button class="btn btn-primary" type="button" id="btn-login">登录</button>
                         <button class="btn btn-danger" data-dismiss="modal">取消</button>
                     </div>
                     <a href="" data-toggle="modal" data-dismiss="modal" data-target="#register">还没有账号？点我注册</a>
@@ -106,10 +106,14 @@
     </div>
 </div>
 
-<div id="footer"></div>
+
 <script type="text/javascript" src="./lib/js/graborders.js"></script>
 <script>
     graborders.ajax.getlist();
+    var s="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MjU2MTc4MjQsInVzZXJJZCI6MSwiaWF0IjoxNTI1NDQ1MDI0fQ.cuPZ4YOvzZRgg_m9K68C2NT88nQWOzU4s-v4MZcobho";
+    setCookie("token",s);
+    var token=getCookie("token");
+    if(token!=null)graborders.login.useTokenlogin(token);
 </script>
 </body>
 </html>

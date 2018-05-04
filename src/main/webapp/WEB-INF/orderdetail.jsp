@@ -39,7 +39,6 @@
 
 
 
-<div id="footer"></div>
 <script type="text/javascript" src="/lib/js/graborders.js"></script>
 <script>
     $(function () {

@@ -37,7 +37,7 @@ public class LoginServiceImpl implements LoginService {
             Map<String,Claim> map=jwtUtil.verifyToken(token.getToken());
             Integer userId=map.get("userId").asInt();
             Token valid=tokenRedis.getToken(userId);
-            if(valid==null||!valid.equals(token))
+            if(valid==null||!valid.getToken().equals(token.getToken()))
                 throw new TokenInvalidException("token失效");
             User user=um.getUserById(userId);
             if(user==null)throw new UserNotFoundException("用户不存在");

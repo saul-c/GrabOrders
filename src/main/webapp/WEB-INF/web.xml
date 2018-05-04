@@ -13,7 +13,7 @@
     <!-- spring配置-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:spring/spring-source.xml,classpath:spring/spring-mybatis.xml,classpath:spring/spring-redis.xml</param-value>
+        <param-value>classpath:spring/spring-source.xml,classpath:spring/spring-mybatis.xml</param-value>
     </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

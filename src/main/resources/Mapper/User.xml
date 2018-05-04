@@ -4,18 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.lightina.GrabOrders.dao.UserMapper">
-    <!-- 缓存类配置 -->
-    <cache type="cn.lightina.GrabOrders.redis.RedisCache" />
 
-    <select id="getUserById" parameterType="int" resultType="User" useCache="true">
-        select userid userId,username userName,passwd passWd from user where userId = #{userId}
+    <select id="getUserById" parameterType="int" resultType="User">
+        select * from user_info where user_id = #{userId}
     </select>
 
     <insert id="addUser" parameterType="User">
-        insert into user (userid,username,passwd) values(null,#{userName},#{passWd})
+        insert into user_info (user_id,user_name,phone_number,pass_wd) values(null,#{user.userName},#{user.phoneNumber},#{user.passWd})
     </insert>
 
     <select id="checkLogin" parameterType="User" resultType="User">
-        select * from user_info where userName=#{user.user_name} and passWd=#{user.passWd};
+        select * from user_info where user_name=#{user.user_name} and passWd=#{user.passWd};
     </select>
 </mapper>

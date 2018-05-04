@@ -121,10 +121,14 @@ var graborders={
     },
     login:{
         useTokenlogin:function (token) {
-            $.post(graborders.URL.gettokenlogin(token),{},function (result) {
-                /*if(result['success']){
-                    $('')
-                }*/
+            $.get(graborders.URL.gettokenlogin(token),{},function (result) {
+                if(result['success']){
+                    var logininfo=result['data'];
+                    var user=logininfo['user'];
+                    $("#login-control").html("<h4>欢迎您:"+user['userName']+"</h4>");
+                }else{
+                    delCookie("token");
+                }
             },"json")
         }
     }
@@ -153,4 +157,11 @@ function getCookie(name) {
         return decodeURI(arr[2]);
     else
         return null;
+}
+function delCookie(name) {
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval=getCookie(name);
+    if(cval!=null)
+        document.cookie= name + "="+cval+";expires="+exp.toGMTString();
 }

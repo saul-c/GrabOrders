@@ -22,11 +22,14 @@ public class JwtUtil {
     加密的密钥 只有服务端知道
      */
     private static final String salt="neverceasetocelebratelife";
+    private final static int expiresSecond = 172800000;
+
+
     public String createToken(User user) throws UnsupportedEncodingException {
         Date nowTime=new Date();
+        long expMillis = nowTime.getTime() + expiresSecond;
+        Date expireTime = new Date(expMillis);
 
-        // TODO: 2018/5/2 设置过期时间
-        Date expireTime=new Date();
 
         Map<String,Object>map=new HashMap<>();
         map.put("alg","HS256");
