@@ -19,6 +19,7 @@ public class UserController {
 
     @Autowired
     private JwtUtil jwtUtil;
+
     @RequestMapping(value = {"/login","/{token}/login"},
             method = RequestMethod.GET,
             produces = {"application/json;charset=UTF-8"})
