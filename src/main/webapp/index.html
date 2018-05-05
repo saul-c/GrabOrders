@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>订单显示页</title>
     <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./lib/css/login.css">
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -14,7 +16,8 @@
             <p class="panel-title" style="text-align:center;font-size:25px">订单信息</p>
             <div id="login-control" style="text-align: right">
                 <button class="btn btn-success"
-                        data-toggle="modal" data-target="#login">登陆</button>
+                        data-toggle="modal" data-target="#login">登陆
+                </button>
                 <button class="btn btn-primary"
                         data-toggle="modal" data-target="#register">注册
                 </button>
@@ -49,25 +52,64 @@
                 <h1 class="text-center">注册</h1>
             </div>
             <div class="modal-body">
-                <form class="form-group" id="form-register">
-                    <div class="form-group">
-                        <label>手机号码</label>
-                        <input class="form-control" type="text" placeholder="11位数字">
+                <div class="form-group has-feedback">
+                    <label for="phoneNum">手机号码</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+                        <input id="phoneNum" class="form-control" placeholder="请输入手机号码" maxlength="11" type="text">
                     </div>
-                    <div class="form-group">
-                        <label>密码</label>
-                        <input class="form-control" type="password" placeholder="至少6位字母或数字">
+                    <span style="color:red;display: none;" class="tips"></span>
+                    <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <label for="password">密码</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                        <input id="password" class="form-control" placeholder="请输入密码" maxlength="20" type="password">
                     </div>
-                    <div class="form-group">
-                        <label>再次输入密码</label>
-                        <input class="form-control" type="password" placeholder="至少6位字母或数字">
+
+                    <span style="color:red;display: none;" class="tips"></span>
+                    <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                </div>
+
+                <div class="form-group has-feedback">
+                    <label for="passwordConfirm">确认密码</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                        <input id="passwordConfirm" class="form-control" placeholder="请再次输入密码" maxlength="20"
+                               type="password">
                     </div>
-                    <div class="text-right">
-                        <button class="btn btn-primary" type="button" id="btn-register">提交</button>
-                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                    <span style="color:red;display: none;" class="tips"></span>
+                    <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5">
+                        <div class="form-group has-feedback">
+                            <label for="idcode-btn">验证码</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-qrcode"></span></span>
+                                <input id="idcode-btn" class="form-control" placeholder="请输入验证码" maxlength="4"
+                                       type="text">
+                            </div>
+                            <span style="color:red;display: none;" class="tips"></span>
+                            <span style="display: none;"
+                                  class="glyphicon glyphicon-remove form-control-feedback"></span>
+                            <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                        </div>
                     </div>
-                    <a href="" data-toggle="modal" data-dismiss="modal" data-target="#login">已有账号？点我登录</a>
-                </form>
+                    <div class="col-xs-5" style="padding-top: 30px">
+                        <div id="idcode" style="background: transparent;"></div>
+                    </div>
+                </div>
+
+                <div class="text-right">
+                    <button class="btn btn-primary" type="button" id="btn-register">提交</button>
+                    <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                </div>
+                <a href="" data-toggle="modal" data-dismiss="modal" data-target="#login">已有账号？点我登录</a>
             </div>
         </div>
     </div>
@@ -86,21 +128,34 @@
                 <h1 class="text-center">登录</h1>
             </div>
             <div class="modal-body">
-                <form class="form-group" id="form-login">
-                    <div class="form-group">
-                        <label>手机号码</label>
-                        <input class="form-control" type="text" placeholder="">
+                <div class="form-group has-feedback">
+                    <label for="phoneNum">手机号码</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+                        <input id="lg-phoneNum" class="form-control" placeholder="请输入手机号码" maxlength="11" type="text">
                     </div>
-                    <div class="form-group">
-                        <label>密码</label>
-                        <input class="form-control" type="password" placeholder="">
+                    <span style="color:red;display: none;" class="tips"></span>
+                    <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                </div>
+
+                <div class="form-group has-feedback">
+                    <label for="password">密码</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                        <input id="lg-password" class="form-control" placeholder="请输入密码" maxlength="20" type="password">
                     </div>
-                    <div class="text-right">
-                        <button class="btn btn-primary" type="button" id="btn-login">登录</button>
-                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
-                    </div>
-                    <a href="" data-toggle="modal" data-dismiss="modal" data-target="#register">还没有账号？点我注册</a>
-                </form>
+
+                    <span style="color:red;display: none;" class="tips"></span>
+                    <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                </div>
+
+                <div class="text-right">
+                    <button class="btn btn-primary" type="button" id="btn-login">登录</button>
+                    <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                </div>
+                <a href="" data-toggle="modal" data-dismiss="modal" data-target="#register">还没有账号？点我注册</a>
             </div>
         </div>
     </div>
@@ -110,10 +165,8 @@
 <script type="text/javascript" src="./lib/js/graborders.js"></script>
 <script>
     graborders.ajax.getlist();
-    var s="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MjU2MTc4MjQsInVzZXJJZCI6MSwiaWF0IjoxNTI1NDQ1MDI0fQ.cuPZ4YOvzZRgg_m9K68C2NT88nQWOzU4s-v4MZcobho";
-    setCookie("token",s);
-    var token=getCookie("token");
-    if(token!=null)graborders.login.useTokenlogin(token);
+    var token = getCookie("token");
+    if (token != null) graborders.login.useTokenlogin(token);
 </script>
 </body>
 </html>
