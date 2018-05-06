@@ -52,6 +52,7 @@
                 <h1 class="text-center">注册</h1>
             </div>
             <div class="modal-body">
+                <form id="form-register">
                 <div class="form-group has-feedback">
                     <label for="phoneNum">手机号码</label>
                     <div class="input-group">
@@ -110,6 +111,7 @@
                     <button class="btn btn-danger" data-dismiss="modal">取消</button>
                 </div>
                 <a href="" data-toggle="modal" data-dismiss="modal" data-target="#login">已有账号？点我登录</a>
+                </form>
             </div>
         </div>
     </div>
@@ -128,34 +130,36 @@
                 <h1 class="text-center">登录</h1>
             </div>
             <div class="modal-body">
-                <div class="form-group has-feedback">
-                    <label for="phoneNum">手机号码</label>
-                    <div class="input-group">
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
-                        <input id="lg-phoneNum" class="form-control" placeholder="请输入手机号码" maxlength="11" type="text">
-                    </div>
-                    <span style="color:red;display: none;" class="tips"></span>
-                    <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
-                    <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
-                </div>
-
-                <div class="form-group has-feedback">
-                    <label for="password">密码</label>
-                    <div class="input-group">
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                        <input id="lg-password" class="form-control" placeholder="请输入密码" maxlength="20" type="password">
+                <form id="form-login">
+                    <div class="form-group has-feedback">
+                        <label for="phoneNum">手机号码</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+                            <input id="lg-phoneNum" class="form-control" placeholder="请输入手机号码" maxlength="11" type="text">
+                        </div>
+                        <span style="color:red;display: none;" class="tips"></span>
+                        <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                        <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
                     </div>
 
-                    <span style="color:red;display: none;" class="tips"></span>
-                    <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
-                    <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
-                </div>
+                    <div class="form-group has-feedback">
+                        <label for="password">密码</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                            <input id="lg-password" class="form-control" placeholder="请输入密码" maxlength="20" type="password">
+                        </div>
 
-                <div class="text-right">
-                    <button class="btn btn-primary" type="button" id="btn-login">登录</button>
-                    <button class="btn btn-danger" data-dismiss="modal">取消</button>
-                </div>
-                <a href="" data-toggle="modal" data-dismiss="modal" data-target="#register">还没有账号？点我注册</a>
+                        <span style="color:red;display: none;" class="tips"></span>
+                        <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                        <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                    </div>
+
+                    <div class="text-right">
+                        <button class="btn btn-primary" type="button" id="btn-login">登录</button>
+                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                    </div>
+                    <a href="" data-toggle="modal" data-dismiss="modal" data-target="#register">还没有账号？点我注册</a>
+                </form>
             </div>
         </div>
     </div>

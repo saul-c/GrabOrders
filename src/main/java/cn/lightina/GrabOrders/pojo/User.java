@@ -2,25 +2,11 @@ package cn.lightina.GrabOrders.pojo;
 
 import java.io.Serializable;
 
-public class User implements Serializable{
-    private static final long serialVersionUID = 1L;
+public class User{
     private int userId;
     private String userName;
     private String phoneNumber;
     private String passWd;
-    private String address;
-
-    public String getUserName() { return userName; }
-
-    public void setUserName(String userName) { this.userName = userName; }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public int getUserId() {
         return userId;
@@ -28,6 +14,14 @@ public class User implements Serializable{
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPhoneNumber() {
@@ -45,4 +39,5 @@ public class User implements Serializable{
     public void setPassWd(String passWd) {
         this.passWd = passWd;
     }
+
 }

@@ -21,7 +21,7 @@ public class UserController {
     private JwtUtil jwtUtil;
 
     @RequestMapping(value = {"/login","/{token}/login"},
-            method = RequestMethod.GET,
+            method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public LoginResult<LoginInfo> login(
@@ -41,9 +41,14 @@ public class UserController {
                 lr = new LoginResult<>(false, "登陆失败");
             }
         }else {
-            /*没有Token 获取Token*/
+            /*没有Token 验证用户并获取Token*/
             try {
+                System.out.print("1234");
+                if(user==null)return new LoginResult<>(false, "user error");
+                System.out.print("12345");
                 User u = loginService.checkLogin(user);
+                System.out.print("123");
+                System.out.print(u);
                 if (u == null) return new LoginResult<>(false, "user not found");
                 int userId = u.getUserId();
                 Token t = new Token(jwtUtil.createToken(user));
@@ -57,4 +62,6 @@ public class UserController {
         }
         return lr;
     }
+
+    // TODO: 2018/5/5 register 
 }

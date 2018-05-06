@@ -10,6 +10,9 @@ var graborders={
         getexposer:function (orderId) {
             return "/graborders/"+orderId+"/exposer";
         },
+        getlogin:function () {
+            return "/graborders/login";
+        },
         gettokenlogin:function (token) {
             return "/graborders/"+token+"/login";
         },
@@ -121,7 +124,7 @@ var graborders={
     },
     login:{
         useTokenlogin:function (token) {
-            $.get(graborders.URL.gettokenlogin(token),{},function (result) {
+            $.post(graborders.URL.gettokenlogin(token),{},function (result) {
                 if(result['success']){
                     var logininfo=result['data'];
                     var user=logininfo['user'];
@@ -218,9 +221,7 @@ function atLeastTwo(password) {
 }
 
 $('#register').find('input').eq(1).change(function() {
-
     password = $(this).val();
-
     if ($(this).val().length < 6) {
         fail($(this), 1, '密码太短，不能少于6个字符',checkregister,0);
     } else {
@@ -304,7 +305,27 @@ $('#btn-login').click(function(e) {
             }
         }
     }else{
-        alert("loginajax");
+        var phonenumber=document.getElementById("lg-phoneNum").value;
+        var passwd=document.getElementById("lg-password").value;
+        var user={'phoneNumber':phonenumber,'passWd':passwd};
+        var JSONdata=JSON.stringify(user);
+        $.ajax({
+            type:"post",
+            url: graborders.URL.getlogin(),
+            data:JSONdata,
+            dataType:"json",
+            contentType : "application/json;charset=UTF-8",
+            success: function(result){
+                if(result['success']){
+                    alert("what");
+                    var logininfo=result['data'];
+                    var user=logininfo['user'];
+                    $("#login-control").html("<h4>欢迎您:"+user['userName']+"</h4>");
+                }else{
+                    alert("登陆失败");
+                }
+            }
+        });
     }
 });
 
