@@ -4,7 +4,6 @@
 目标优化高并发场景<br>
 
 ### 使用技术
-	本项目所选用的全部技术框架如下表
 后端 | ... 
 :---:|:---
 核心框架 | spring、springmvc、mybatis
@@ -17,7 +16,7 @@
 前端 | ... 
 :---:|:---
 核心框架(轻量简洁) | [jQuery](http://jquery.cuishifeng.cn/)
-路由框架 | (待使用) [Angular.js](http://www.angular.cnn/)
+路由框架 | (待使用) [Angular.js](http://www.angular.cn/)
 
 ### 目录结构
 ```
