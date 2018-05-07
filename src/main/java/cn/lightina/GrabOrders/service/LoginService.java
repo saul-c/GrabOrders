@@ -11,4 +11,5 @@ public interface LoginService {
     int addUser(User user);
     User checkLogin(User user);
     User checkToken(Token token)throws UnsupportedEncodingException,LoginException;
+    void insertToken(Token token,User user);
 }

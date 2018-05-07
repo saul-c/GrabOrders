@@ -32,7 +32,7 @@ public class JwtUtilTest {
         }catch (Exception e){
             e.printStackTrace();
         }
-        tokenRedis.putOrder(new Token(s),1);
+        tokenRedis.putToken(new Token(s),1);
         System.out.println("result:");
         System.out.println(s);
         System.out.println("ends");

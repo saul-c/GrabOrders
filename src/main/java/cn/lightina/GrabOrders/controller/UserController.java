@@ -43,15 +43,12 @@ public class UserController {
         }else {
             /*没有Token 验证用户并获取Token*/
             try {
-                System.out.print("1234");
                 if(user==null)return new LoginResult<>(false, "user error");
-                System.out.print("12345");
                 User u = loginService.checkLogin(user);
-                System.out.print("123");
-                System.out.print(u);
                 if (u == null) return new LoginResult<>(false, "user not found");
                 int userId = u.getUserId();
-                Token t = new Token(jwtUtil.createToken(user));
+                Token t = new Token(jwtUtil.createToken(u));
+                loginService.insertToken(t,u);
                 /*隐藏关键信息*/
                 u.setUserId(-1);
                 u.setPassWd(null);
@@ -63,5 +60,6 @@ public class UserController {
         return lr;
     }
 
-    // TODO: 2018/5/5 register 
+    // TODO: 2018/5/5 register
+    
 }

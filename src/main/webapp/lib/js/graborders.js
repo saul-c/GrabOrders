@@ -317,10 +317,12 @@ $('#btn-login').click(function(e) {
             contentType : "application/json;charset=UTF-8",
             success: function(result){
                 if(result['success']){
-                    alert("what");
                     var logininfo=result['data'];
                     var user=logininfo['user'];
+                    var token=logininfo['token'];
                     $("#login-control").html("<h4>欢迎您:"+user['userName']+"</h4>");
+                    $("#login").modal('hide');
+                    setCookie("token",token['token']);
                 }else{
                     alert("登陆失败");
                 }

@@ -55,4 +55,12 @@ public class LoginServiceImpl implements LoginService {
         return um.checkLogin(user);
     }
 
+    @Override
+    public void insertToken(Token token,User user) {
+        try {
+            tokenRedis.putToken(token,user.getUserId());
+        }catch (Exception e){
+            throw e;
+        }
+    }
 }

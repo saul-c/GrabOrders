@@ -27,7 +27,7 @@ public class TokenRedis {
         }
         return null;
     }
-    public String putOrder(Token token,int userId){
+    public String putToken(Token token,int userId){
         Jedis jedis=null;
         try {
             jedis=JedisUtil.getJedis();
