@@ -19,8 +19,8 @@ var graborders={
         getregister:function () {
             return "/graborders/register";
         },
-        execution:function (orderId,md5) {
-            return "/graborders/"+orderId+"/"+md5+"/execution";
+        execution:function (orderId,md5,token) {
+            return "/graborders/"+orderId+"/"+md5+"/"+token+"/execution";
         }
     },
     ajax:{
@@ -117,7 +117,9 @@ var graborders={
             /*TODO
             加入token验证
              */
-            $.post(graborders.URL.execution(orderId,md5),{},function (result) {
+            var token=getCookie("token");
+            if(token==null)alert("请先登录!");
+            $.post(graborders.URL.execution(orderId,md5,token),{},function (result) {
                 if(result['success']){
                     alert("秒杀成功！");
                 }else{
@@ -132,7 +134,7 @@ var graborders={
                 if(result['success']){
                     var logininfo=result['data'];
                     var user=logininfo['user'];
-                    $("#login-control").html("<h4>欢迎您:"+user['phoneNumber']+"</h4>");
+                    $("#login-control").html("<h4>欢迎您:"+user['phoneNumber']+"</h4>"+"" + "<button class=\"btn btn-primary\" type=\"button\" id=\"btn-exit\">退出登录</button>");
                 }else{
                     delCookie("token");
                 }
@@ -279,7 +281,7 @@ $('#btn-register').click(function(e) {
                     var logininfo=result['data'];
                     var user=logininfo['user'];
                     var token=logininfo['token'];
-                    $("#login-control").html("<h4>欢迎您:"+user['phoneNumber']+"</h4>");
+                    $("#login-control").html("<h4>欢迎您:"+user['phoneNumber']+"</h4>"+ "<button class=\"btn btn-primary\" type=\"button\" id=\"btn-exit\">退出登录</button>");
                     $("#register").modal('hide');
                     setCookie("token",token['token']);
                 }else{
@@ -340,7 +342,7 @@ $('#btn-login').click(function(e) {
                     var logininfo=result['data'];
                     var user=logininfo['user'];
                     var token=logininfo['token'];
-                    $("#login-control").html("<h4>欢迎您:"+user['phoneNumber']+"</h4>");
+                    $("#login-control").html("<h4>欢迎您:"+user['phoneNumber']+"</h4>"+ "<button class=\"btn btn-primary\" type=\"button\" id=\"btn-exit\">退出登录</button>");
                     $("#login").modal('hide');
                     setCookie("token",token['token']);
                 }else{
@@ -349,4 +351,8 @@ $('#btn-login').click(function(e) {
             }
         });
     }
+});
+$('#login-control').on('click', '#btn-exit', function(){
+    delCookie("token");
+    $("#login-control").html("<button class=\"btn btn-success\" data-toggle=\"modal\" data-target=\"#login\">登陆</button> <button class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#register\">注册</button>");
 });

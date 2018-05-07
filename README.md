@@ -13,13 +13,6 @@
 │   │   │       └── lightina
 │   │   │           └── GrabOrders
 │   │   │               ├── Exception (异常类)
-│   │   │               │   ├── GrabException.java
-│   │   │               │   ├── GrabFinishException.java
-│   │   │               │   ├── LoginException.java
-│   │   │               │   ├── OrderException.java
-│   │   │               │   ├── RegisterException.java
-│   │   │               │   ├── TokenInvalidException.java
-│   │   │               │   └── UserNotFoundException.java
 │   │   │               ├── aop	(登陆日志切面 not applied)
 │   │   │               │   └── LogInterceptor.java
 │   │   │               ├── controller

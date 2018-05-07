@@ -2,8 +2,10 @@ package cn.lightina.GrabOrders.controller;
 
 import cn.lightina.GrabOrders.Exception.GrabException;
 import cn.lightina.GrabOrders.Exception.OrderException;
+import cn.lightina.GrabOrders.jwt.Token;
 import cn.lightina.GrabOrders.service.GrabService;
 import cn.lightina.GrabOrders.pojo.*;
+import cn.lightina.GrabOrders.service.LoginService;
 import org.junit.runners.Parameterized;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -22,6 +24,9 @@ import java.util.List;
 public class GrabController {
     @Autowired
     GrabService grabService;
+
+    @Autowired
+    LoginService loginService;
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @ResponseBody
@@ -69,16 +74,18 @@ public class GrabController {
         return gr;
     }
 
-    @RequestMapping(value="/{orderId}/{md5}/execution",
+    @RequestMapping(value="/{orderId}/{md5}/{token}/execution",
             method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     GrabResult<SuccessGrabbed> execution(
             @PathVariable("orderId")Integer orderId,
-            @PathVariable("md5")String md5) {
+            @PathVariable("md5")String md5,
+            @PathVariable("token")String token) {
         GrabResult<SuccessGrabbed> gr;
         try {
-            SuccessGrabbed sg=grabService.executeGrab(orderId,1,md5);
+            User u=loginService.checkToken(new Token(token));
+            SuccessGrabbed sg=grabService.executeGrab(orderId,u.getUserId(),md5);
             gr=new GrabResult<>(true,sg);
         } catch (Exception e) {
             gr=new GrabResult<>(false,"error happen");

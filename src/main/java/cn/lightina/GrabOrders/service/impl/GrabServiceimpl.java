@@ -5,9 +5,11 @@ import cn.lightina.GrabOrders.Exception.GrabFinishException;
 import cn.lightina.GrabOrders.Exception.OrderException;
 import cn.lightina.GrabOrders.dao.OrderMapper;
 import cn.lightina.GrabOrders.dao.SuccessGrabbedMapper;
+import cn.lightina.GrabOrders.jwt.JwtUtil;
 import cn.lightina.GrabOrders.pojo.Exposer;
 import cn.lightina.GrabOrders.pojo.Order;
 import cn.lightina.GrabOrders.pojo.SuccessGrabbed;
+import cn.lightina.GrabOrders.pojo.User;
 import cn.lightina.GrabOrders.redis.OrderRedis;
 import cn.lightina.GrabOrders.service.GrabService;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Date;
 
@@ -29,6 +32,9 @@ public class GrabServiceimpl implements GrabService {
 
     @Autowired
     private OrderRedis orderRedis;
+
+    @Autowired
+    JwtUtil jwtUtil;
 
     @Transactional
     public SuccessGrabbed executeGrab(int orderId,int userId, String md5) throws OrderException{
