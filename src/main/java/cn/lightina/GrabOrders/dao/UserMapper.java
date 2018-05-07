@@ -4,7 +4,7 @@ import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
     User getUserById(int userId);
-    int addUser(User user);
+    int insertUser(@Param("user")User user);
     User checkLogin(@Param("user")User user);
 }
 

@@ -29,7 +29,7 @@ public class LoginServiceImpl implements LoginService {
 
     public User getUserById(int id){ return um.getUserById(id); }
 
-    public int addUser(User user) { return um.addUser(user); }
+    public int insertUser(User user) { return um.insertUser(user); }
 
     @Override
     public User checkToken(Token token) throws LoginException,UnsupportedEncodingException{

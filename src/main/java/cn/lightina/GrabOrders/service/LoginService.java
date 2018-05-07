@@ -8,7 +8,7 @@ import java.io.UnsupportedEncodingException;
 
 public interface LoginService {
     User getUserById(int id);
-    int addUser(User user);
+    int insertUser(User user);
     User checkLogin(User user);
     User checkToken(Token token)throws UnsupportedEncodingException,LoginException;
     void insertToken(Token token,User user);

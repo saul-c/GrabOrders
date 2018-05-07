@@ -1,6 +1,8 @@
 package cn.lightina.GrabOrders.controller;
 
 
+import cn.lightina.GrabOrders.Exception.LoginException;
+import cn.lightina.GrabOrders.Exception.RegisterException;
 import cn.lightina.GrabOrders.jwt.JwtUtil;
 import cn.lightina.GrabOrders.jwt.Token;
 import cn.lightina.GrabOrders.pojo.LoginInfo;
@@ -60,6 +62,28 @@ public class UserController {
         return lr;
     }
 
-    // TODO: 2018/5/5 register
-    
+    @RequestMapping(value = "/register",
+                    method = RequestMethod.POST,
+                    produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public LoginResult<LoginInfo> register(@RequestBody User user){
+        LoginResult<LoginInfo>lr;
+        try {
+            if(user==null)lr=new LoginResult<>(false,"用户信息出错");
+            int count=loginService.insertUser(user);
+            if(count<=0)throw new RegisterException("注册失败");
+            User u=loginService.checkLogin(user);
+            if(u==null)throw new LoginException("注册未写入");
+            int userId = u.getUserId();
+            Token t = new Token(jwtUtil.createToken(u));
+            loginService.insertToken(t,u);
+            /*隐藏关键信息*/
+            u.setUserId(-1);
+            u.setPassWd(null);
+            lr=new LoginResult<>(true,new LoginInfo(u,t));
+        }catch (Exception e){
+            lr=new LoginResult<>(false,"注册失败");
+        }
+        return lr;
+    }
 }

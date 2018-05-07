@@ -16,6 +16,9 @@ var graborders={
         gettokenlogin:function (token) {
             return "/graborders/"+token+"/login";
         },
+        getregister:function () {
+            return "/graborders/register";
+        },
         execution:function (orderId,md5) {
             return "/graborders/"+orderId+"/"+md5+"/execution";
         }
@@ -128,14 +131,11 @@ var graborders={
                 if(result['success']){
                     var logininfo=result['data'];
                     var user=logininfo['user'];
-                    $("#login-control").html("<h4>欢迎您:"+user['userName']+"</h4>");
+                    $("#login-control").html("<h4>欢迎您:"+user['phoneNumber']+"</h4>");
                 }else{
                     delCookie("token");
                 }
             },"json")
-        },
-        register:function () {
-
         }
     }
 }
@@ -266,7 +266,30 @@ $('#btn-register').click(function(e) {
             }
         }
     }else{
-        alert("ajax");
+        var phonenumber=document.getElementById("re-phoneNum").value;
+        var passwd=document.getElementById("re-password").value;
+        var user={'phoneNumber':phonenumber,'passWd':passwd};
+        var JSONdata=JSON.stringify(user);
+        $.ajax({
+            type:"post",
+            url: graborders.URL.getregister(),
+            data:JSONdata,
+            dataType:"json",
+            contentType : "application/json;charset=UTF-8",
+            success: function(result){
+                if(result['success']){
+                    alert("注册成功");
+                    var logininfo=result['data'];
+                    var user=logininfo['user'];
+                    var token=logininfo['token'];
+                    $("#login-control").html("<h4>欢迎您:"+user['phoneNumber']+"</h4>");
+                    $("#register").modal('hide');
+                    setCookie("token",token['token']);
+                }else{
+                    alert("注册失败");
+                }
+            }
+        });
     }
 });
 
@@ -320,7 +343,7 @@ $('#btn-login').click(function(e) {
                     var logininfo=result['data'];
                     var user=logininfo['user'];
                     var token=logininfo['token'];
-                    $("#login-control").html("<h4>欢迎您:"+user['userName']+"</h4>");
+                    $("#login-control").html("<h4>欢迎您:"+user['phoneNumber']+"</h4>");
                     $("#login").modal('hide');
                     setCookie("token",token['token']);
                 }else{
