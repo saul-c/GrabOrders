@@ -1,6 +1,23 @@
 # GrabOrders
+### 简介
 一个基于Spring+SpringMVC+Mybatis+Redis做二级缓存+Maven管理的抢单系统<br>
-努力学习ing= = 目标优化高并发场景<br>
+目标优化高并发场景<br>
+
+### 使用技术
+	本项目所选用的全部技术框架如下表
+后端 | ... 
+:---:|:---
+核心框架 | spring、springmvc、mybatis
+连接池 | Alibaba Druid
+缓存框架 | Redis
+权限框架 | JWT
+图片验证码(支持gif) | (待使用)[EasyCaptcha](https://github.com/whvcse/EasyCaptcha)
+密码加密 | (待使用)[EndecryptUtil](https://github.com/whvcse/EndecryptUtil)
+
+前端 | ... 
+:---:|:---
+核心框架(轻量简洁) | [jQuery](http://jquery.cuishifeng.cn/)
+路由框架 | (待使用) [Angular.js](http://www.angular.cnn/)
 
 ### 目录结构
 ```
