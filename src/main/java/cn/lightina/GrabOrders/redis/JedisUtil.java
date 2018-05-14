@@ -4,9 +4,9 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 public class JedisUtil {
-    private static String ADDR = "115.159.206.60";
+    private static String ADDR = "";
     private static int PORT = 6379;
-    private static String AUTH = "qcsb";
+    private static String AUTH = "";
 
     private static int MAX_ACTIVE = 1024;
 

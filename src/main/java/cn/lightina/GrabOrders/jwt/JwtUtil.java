@@ -8,6 +8,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import javafx.util.Builder;
+import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
@@ -17,6 +18,7 @@ import java.util.Map;
 /**
  *
  */
+@Component
 public class JwtUtil {
     /*
     加密的密钥 只有服务端知道
